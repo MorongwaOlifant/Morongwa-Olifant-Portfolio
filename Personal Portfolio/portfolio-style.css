@@ -239,3 +239,35 @@ nav ul li a:hover {
     text-align: center;
     color: white; /* Text color for contrast */
 }
+
+/* Line Separator Styling */
+.separator-line {
+    width: 156px;
+    height: 3px;
+    background-color: white;
+    position: relative;
+    margin: 20px auto; /* Centers line horizontally and adds spacing */
+}
+
+/* Outer Circle Styling */
+.outer-circle {
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Inner Circle Styling */
+.inner-circle {
+    width: 8px;
+    height: 8px;
+    background-color: #0284C7; /* Matches rectangle background */
+    border-radius: 50%;
+}
