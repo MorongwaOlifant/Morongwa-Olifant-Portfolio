@@ -271,3 +271,135 @@ nav ul li a:hover {
     background-color: #0284C7; /* Matches rectangle background */
     border-radius: 50%;
 }
+
+.skills-section {
+    width: 1366px;
+    height: 798px;
+    color: #334155;
+    text-align: center;
+    margin-left: 100px;
+    padding: 40px 0;
+}
+
+.skills-section h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.skills-section p {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+/* Separator Line with Circles */
+.skills-section .separator-line {
+    width: 156px;
+    height: 3px;
+    background-color: #334155;
+    position: relative;
+    margin: 20px auto;
+}
+
+/* Circle styling */
+.skills-section .outer-circle {
+    width: 12px;
+    height: 12px;
+    background-color: #334155;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.skills-section .inner-circle {
+    width: 8px;
+    height: 8px;
+    background-color: #334155;
+    border-radius: 50%;
+}
+
+/* Positioning circles equidistant from center */
+.skills-section .left-circle {
+    left: 35%;
+}
+
+.skills-section .right-circle {
+    right: 35%;
+}
+
+.logos-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 866px; 
+    height: 304px;
+    margin-left: 250px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.logo-block {
+    display: flex; /* Enable flexbox on the logo block */
+    flex-direction: column; /* Stack logo and skill level vertically */
+    justify-content: center;
+    align-items: center; 
+    margin: 10px;
+    width: 14%; /* Adjust the width to fit 6 items in one row */
+}
+
+.logo-block img {
+    text-align: center;
+    width: 60px; /* Adjust size of logos as needed */
+    height: auto;
+}
+
+.logo-block p {
+    margin: 5px 0;
+    color: #6B7280;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.skill-level {
+    display: flex; /* Use flex to center the text */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 4px 10px; /* Add some padding */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 14px; /* Font size */
+    font-weight: bold; /* Make the text bold */
+    margin-top: 5px; /* Space above the rectangle */
+}
+
+.medium {
+    background-color: #FEF3C7; /* Background color for Medium */
+    color: #DE8821; /* Text color for Medium */
+    width: 82px; /* Fixed width */
+    height: 20px; /* Fixed height */
+    text-align: center; /* Center text */
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 100px;
+}
+
+.basic {
+    background-color: #E0F2FE; /* Background color for Basic */
+    color: #49A7D8; /* Text color for Basic */
+    width: 82px; /* Fixed width */
+    height: 20px; /* Fixed height */
+    text-align: center; /* Center text */
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 100px;
+}
