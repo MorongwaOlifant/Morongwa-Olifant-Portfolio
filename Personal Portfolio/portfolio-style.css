@@ -347,6 +347,7 @@ nav ul li a:hover {
     justify-content: space-between;
     width: 100%;
     flex-wrap: wrap;
+    margin-top: 40px;
 }
 
 .logo-block {
@@ -402,4 +403,71 @@ nav ul li a:hover {
     font-size: 12px;
     font-weight: bold;
     border-radius: 100px;
+}
+
+/* Main Contact Container */
+.contact-container {
+    width: 1336px;
+    height: 872px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: -300px auto 0; /* Adjust this margin to move the contact container up */
+}
+
+/* Inner Contact Box */
+.contact-inner {
+    width: 212px;
+    height: 85px;
+    text-align: center;
+}
+
+/* Contact Heading */
+.contact-inner h1 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #334155;
+    margin: 0;
+}
+
+/* Separator Line */
+.contact-separator-line {
+    position: relative;
+    width: 156px;
+    height: 3px;
+    background-color: #334155;
+    margin: 10px auto;
+}
+
+/* Outer Circles */
+.contact-separator-line .outer-circle {
+    width: 12px;
+    height: 12px;
+    background-color: #334155;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%; /* Align vertically with the line */
+    transform: translateY(-50%);
+}
+
+/* Positioning Circles: left, center, right */
+.contact-separator-line .left-circle {
+    left: 0;
+}
+
+.contact-separator-line .center-circle {
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+}
+
+.contact-separator-line .right-circle {
+    right: 0;
+}
+
+/* Inner circle styling */
+.contact-separator-line .inner-circle {
+    width: 8px;
+    height: 8px;/* Optional contrasting color */
+    border-radius: 50%;
+    margin: auto;
 }
