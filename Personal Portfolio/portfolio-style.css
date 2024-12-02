@@ -240,6 +240,19 @@ nav ul li a:hover {
     color: white; /* Text color for contrast */
 }
 
+.history-of-education {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .timeline {
+    margin: 20px auto; /* Center the line horizontally */
+    width: 10px;
+    height: 267px;
+    background-color: white; 
+    border-radius: 5px; /* Rounds the ends */
+  }
+
 /* Line Separator Styling */
 .separator-line {
     width: 156px;
