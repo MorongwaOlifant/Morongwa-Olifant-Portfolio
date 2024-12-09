@@ -1,7 +1,7 @@
 /* Body Styling */
 body, html {
     background-color: white;
-    font-family: monospace;
+    font-family: 'Montserrat', sans-serif; 
 }
 
 body {
@@ -237,7 +237,7 @@ nav ul li a:hover {
 
 .edu-container {
     text-align: center;
-    color: white; /* Text color for contrast */
+    color: white; 
 }
 
 .history-of-education {
@@ -245,13 +245,59 @@ nav ul li a:hover {
     margin-bottom: 20px;
   }
   
-  .timeline {
-    margin: 20px auto; /* Center the line horizontally */
+.timeline {
+    margin: 20px auto;
     width: 10px;
     height: 267px;
     background-color: white; 
-    border-radius: 5px; /* Rounds the ends */
-  }
+    position: relative; /* Reference point for absolutely positioned elements */
+}
+
+.timeline .circle {
+    width: 33px;
+    height: 33px;
+    background-color: #334155;
+    border-radius: 50%; 
+    position: absolute; /* Absolute positioning relative to .timeline */
+    top: 60px; /* Half of the circle's height to align the center */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Offset by half the circle's width */
+}
+
+.timeline .rectangle {
+    width: 435px;
+    height: 128px;
+    background-color: white;
+    border-radius: 10px; 
+    position: absolute; 
+    top: 0; 
+    left: 50%; 
+    transform: translate(-495px, 10px);
+    padding: 10px; 
+    box-sizing: border-box; 
+}
+
+/* Styling for text inside the rectangle */
+.rectangle h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #334155;
+    margin: 0;
+    margin-bottom: 8px;
+    text-align: left; /* Align text to the left */
+}
+
+.rectangle p {
+    font-size: 16px;
+    color: #6B7280;
+    margin: 4px 0;
+    text-align: left; /* Align text to the left */
+}
+
+.rectangle .year {
+    font-weight: 300; /* Lighter font weight for the year */
+    color: #A1A5B0; /* Lighter color for the year text */
+}
 
 /* Line Separator Styling */
 .separator-line {
@@ -259,7 +305,7 @@ nav ul li a:hover {
     height: 3px;
     background-color: white;
     position: relative;
-    margin: 20px auto; /* Centers line horizontally and adds spacing */
+    margin: 20px auto; /
 }
 
 /* Outer Circle Styling */
