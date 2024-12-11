@@ -97,7 +97,7 @@ nav ul li a:hover {
 /* Positions main content to leave space for the image on the right */
 .main-about, .button-container, .social-media-links {
     margin-left: 160px;
-    width: 666px; /* Adjust width if necessary */
+    width: 666px; 
 }
 
 .main-about {
@@ -174,31 +174,31 @@ nav ul li a:hover {
     display: flex;
     gap: 20px;
     margin-top: 20px;
-    margin-left: 160px; /* Aligns with button container */
+    margin-left: 160px; 
 }
 
 .social-icon {
-    font-size: 24px; /* Adjust size if necessary */
-    color: #6B7280; /* Matches primary color */
+    font-size: 24px;
+    color: #6B7280; 
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .social-icon:hover {
-    color: #000000; /* Adjust to any hover color you like */
+    color: #000000; 
 }
 
 .image-frame {
     position: absolute;
     top: 250;
-    right: -300px; /* Adjust this to control spacing from the content */
+    right: -300px; 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .image-frame img {
-    border-radius: 50%; /* Rounded corners */
+    border-radius: 50%; 
     margin-left: 920px;
 }
 
@@ -259,8 +259,8 @@ nav ul li a:hover {
     background-color: #334155;
     border-radius: 50%; 
     position: absolute; /* Absolute positioning relative to .timeline */
-    top: 60px; /* Half of the circle's height to align the center */
-    left: 50%; /* Center horizontally */
+    top: 60px;
+    left: 50%; 
     transform: translateX(-50%); /* Offset by half the circle's width */
 }
 
@@ -284,19 +284,19 @@ nav ul li a:hover {
     color: #334155;
     margin: 0;
     margin-bottom: 8px;
-    text-align: left; /* Align text to the left */
+    text-align: left; 
 }
 
 .rectangle p {
     font-size: 16px;
     color: #6B7280;
     margin: 4px 0;
-    text-align: left; /* Align text to the left */
+    text-align: left; 
 }
 
 .rectangle .year {
-    font-weight: 300; /* Lighter font weight for the year */
-    color: #A1A5B0; /* Lighter color for the year text */
+    font-weight: 300; 
+    color: #A1A5B0; 
 }
 
 /* Line Separator Styling */
@@ -327,7 +327,7 @@ nav ul li a:hover {
 .inner-circle {
     width: 8px;
     height: 8px;
-    background-color: #0284C7; /* Matches rectangle background */
+    background-color: #0284C7; 
     border-radius: 50%;
 }
 
@@ -415,12 +415,12 @@ nav ul li a:hover {
     justify-content: center;
     align-items: center; 
     margin: 10px;
-    width: 14%; /* Adjust the width to fit 6 items in one row */
+    width: 14%; 
 }
 
 .logo-block img {
     text-align: center;
-    width: 60px; /* Adjust size of logos as needed */
+    width: 60px;
     height: auto;
 }
 
@@ -435,30 +435,30 @@ nav ul li a:hover {
     display: flex; /* Use flex to center the text */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
-    padding: 4px 10px; /* Add some padding */
-    border-radius: 4px; /* Rounded corners */
-    font-size: 14px; /* Font size */
-    font-weight: bold; /* Make the text bold */
-    margin-top: 5px; /* Space above the rectangle */
+    padding: 4px 10px; 
+    border-radius: 4px; 
+    font-size: 14px; 
+    font-weight: bold; 
+    margin-top: 5px; 
 }
 
 .medium {
-    background-color: #FEF3C7; /* Background color for Medium */
-    color: #DE8821; /* Text color for Medium */
-    width: 82px; /* Fixed width */
-    height: 20px; /* Fixed height */
-    text-align: center; /* Center text */
+    background-color: #FEF3C7; 
+    color: #DE8821; 
+    width: 82px; 
+    height: 20px; 
+    text-align: center; 
     font-size: 12px;
     font-weight: bold;
     border-radius: 100px;
 }
 
 .basic {
-    background-color: #E0F2FE; /* Background color for Basic */
-    color: #49A7D8; /* Text color for Basic */
-    width: 82px; /* Fixed width */
-    height: 20px; /* Fixed height */
-    text-align: center; /* Center text */
+    background-color: #E0F2FE; 
+    color: #49A7D8; 
+    width: 82px;
+    height: 20px; 
+    text-align: center; 
     font-size: 12px;
     font-weight: bold;
     border-radius: 100px;
@@ -505,7 +505,7 @@ nav ul li a:hover {
     background-color: #334155;
     border-radius: 50%;
     position: absolute;
-    top: 50%; /* Align vertically with the line */
+    top: 50%; 
     transform: translateY(-50%);
 }
 
@@ -526,7 +526,56 @@ nav ul li a:hover {
 /* Inner circle styling */
 .contact-separator-line .inner-circle {
     width: 8px;
-    height: 8px;/* Optional contrasting color */
+    height: 8px;
     border-radius: 50%;
     margin: auto;
+}
+
+/* Contact Form Styling */
+.contact-form {
+    width: 395px;
+    height: 500px;
+    background-color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px; 
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Reduced gap between form elements */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    box-sizing: border-box; 
+    margin-left: 200px; 
+}
+
+.contact-form label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 2px; 
+    align-self: flex-start; /* Align labels to the left */
+}
+
+.contact-form input {
+    width: 100%; 
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.contact-form button {
+    width: 146px;
+    height: 36px;
+    background-color: #0284C7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #026fa1;
 }
