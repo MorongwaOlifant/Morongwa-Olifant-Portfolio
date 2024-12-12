@@ -203,7 +203,7 @@ nav ul li a:hover {
 }
 
 .wave-divider {
-    margin-bottom: -5px; /* Adjusts overlap with the content */
+    margin-bottom: -27px; /* Adjusts overlap with the content */
     margin-left: 100px;
     color: #0284C7;
 }
@@ -337,6 +337,7 @@ nav ul li a:hover {
     color: #334155;
     text-align: center;
     margin-left: 100px;
+    margin-bottom: 0%;
     padding: 40px 0;
 }
 
@@ -471,7 +472,7 @@ nav ul li a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: -300px auto 0; /* Adjust this margin to move the contact container up */
+    margin: -250px auto 0; /* Adjust this margin to move the contact container up */
 }
 
 /* Inner Contact Box */
@@ -546,6 +547,7 @@ nav ul li a:hover {
     align-items: center; /* Center content horizontally */
     box-sizing: border-box; 
     margin-left: 200px; 
+    margin-top: 150px;
 }
 
 .contact-form label {
