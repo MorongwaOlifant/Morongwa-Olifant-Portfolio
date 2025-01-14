@@ -472,6 +472,7 @@ nav ul li a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     margin: -250px auto 0; /* Adjust this margin to move the contact container up */
 }
 
@@ -546,8 +547,8 @@ nav ul li a:hover {
     justify-content: center; /* Center content vertically */
     align-items: center; /* Center content horizontally */
     box-sizing: border-box; 
-    margin-left: 200px; 
-    margin-top: 150px;
+    margin-left: 100px;
+    margin-top: 150px; 
 }
 
 .contact-form label {
@@ -581,4 +582,30 @@ nav ul li a:hover {
 
 .contact-form button:hover {
     background-color: #026fa1;
+}
+
+.contact-left {
+    flex: 1; /* Allocates space for the image */
+}
+
+.contact-image {
+    width: 400px; /* Adjust image size */
+    height: auto;
+    border-radius: 10px; 
+    margin-top: 200px;
+}
+
+.contact-right {
+    flex: 1; /* Allocates space for the form */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.contact-content {
+    display: flex;
+    gap: 20px; /* Adds space between image and form */
+    justify-content: center;
+    align-items: center;
 }
