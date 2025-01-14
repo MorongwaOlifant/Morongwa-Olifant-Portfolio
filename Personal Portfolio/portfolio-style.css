@@ -548,7 +548,7 @@ nav ul li a:hover {
     align-items: center; /* Center content horizontally */
     box-sizing: border-box; 
     margin-left: 100px;
-    margin-top: 150px; 
+    margin-top: 100px; 
 }
 
 .contact-form label {
@@ -592,7 +592,7 @@ nav ul li a:hover {
     width: 400px; /* Adjust image size */
     height: auto;
     border-radius: 10px; 
-    margin-top: 200px;
+    margin-top: 150px;
 }
 
 .contact-right {
