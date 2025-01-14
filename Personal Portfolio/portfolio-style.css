@@ -609,3 +609,47 @@ nav ul li a:hover {
     justify-content: center;
     align-items: center;
 }
+
+/* Footer Styles */
+footer {
+    background-color: #0284C7;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 500px;
+}
+
+.footer-content {
+    margin-top: -10px;
+}
+
+.footer-content p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    margin: 0;
+}
+
+.footer-social-icons a {
+    margin: 0 10px;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-social-icons a:hover {
+    color: white;
+}
+
+/* Wave Divider Styles */
+footer .wave-divider {
+    position: relative;
+    top: -323px; /* Ensures it overlaps seamlessly with the footer */
+    width: 1366px;
+    margin-left: -0px;
+}
+
+footer .wave-divider svg {
+    display: block;
+    width: 100%;
+}
