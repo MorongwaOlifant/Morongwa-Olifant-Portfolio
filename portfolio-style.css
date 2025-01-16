@@ -662,3 +662,96 @@ footer .wave-divider svg {
     display: block;
     width: 100%;
 }
+
+/* Add responsive design */
+@media (max-width: 768px) {
+    body, html {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+    }
+
+    header, .skills-section, .rectangle-section {
+        width: 100%;
+        padding: 0 20px;
+        margin: 0;
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .main-about, .button-container, .social-media-links {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .button-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .logos-container {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo-block {
+        width: auto;
+    }
+
+    .image-frame img {
+        width: 80%;
+        margin-left: 0;
+    }
+
+    .skills-section, .contact-container {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .social-media-links {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 14px;
+    }
+
+    nav ul li a {
+        font-size: 14px;
+    }
+
+    .main-about h2 {
+        font-size: 24px;
+    }
+
+    .main-about p, .rectangle p, .skills-section p {
+        font-size: 14px;
+    }
+
+    .button-container button {
+        width: auto;
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+
+    .social-media-links {
+        justify-content: space-around;
+    }
+}
