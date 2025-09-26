@@ -83,12 +83,12 @@ export default function Contact() {
       {/* Resume + Social Links */}
       <div className="flex flex-col items-center mt-10 space-y-6">
         <a
-          href="/Morongwa Olifant Resume.pdf"
+          href="/Morongwa-Olifant-Resume.pdf"
           download
           className="flex items-center gap-2 px-5 py-3 bg-gray-100 rounded-full shadow hover:bg-gray-200 transition"
         >
           <HiOutlineDocumentDownload className="text-xl" />
-          View Resume
+          Download Resume
         </a>
       </div>
     </section>
