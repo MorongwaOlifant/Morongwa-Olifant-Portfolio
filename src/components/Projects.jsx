@@ -9,7 +9,7 @@ const projects = [
       "A WhatsApp-based job alert platform helping South African youth connect with relevant job opportunities in real-time.",
     image: "/projects/jobsta.jpg",
     github: "https://github.com/MorongwaOlifant/jobsta",
-    demo: "#",
+    demo: "https://jobsta-8n1hee1g1-morongwa-olifants-projects.vercel.app/",
   },
   {
     title: "PayTrckr",
