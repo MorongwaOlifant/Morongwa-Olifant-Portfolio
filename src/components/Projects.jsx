@@ -12,19 +12,11 @@ const projects = [
     demo: "https://jobsta-8n1hee1g1-morongwa-olifants-projects.vercel.app/",
   },
   {
-    title: "PayTrckr",
+    title: "CityFix",
     description:
-      "A lay-by and payment tracking manager designed for small online sellers, with a future roadmap to evolve into a full payment gateway solution.",
-    image: "/projects/paytrckr.jpg",
-    github: "https://github.com/MorongwaOlifant/paytrckr",
-    demo: "#",
-  },
-  {
-    title: "Zazi (SOS System)",
-    description:
-      "An SOS emergency response system built to connect users to help quickly during crises, improving safety and response times.",
-    image: "/projects/zazi.jpg",
-    github: "https://github.com/MorongwaOlifant/zazi",
+      "CityFix is a simple platform that lets citizens report issues like potholes or broken lights and track progress. City officials use it to manage and resolve these reports efficiently.",
+    image: "/projects/cityfix.jpg",
+    github: "https://github.com/MorongwaOlifant/cityfix",
     demo: "#",
   },
 ];
