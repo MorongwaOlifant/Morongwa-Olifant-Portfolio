@@ -16,7 +16,7 @@ const projects = [
     description:
       "CityFix is a simple platform that lets citizens report issues like potholes or broken lights and track progress. City officials use it to manage and resolve these reports efficiently.",
     image: "/projects/cityfix.jpg",
-    github: "https://github.com/MorongwaOlifant/cityfix",
+    github: "https://github.com/MorongwaOlifant/cityfix-web",
     demo: "#",
   },
 ];
