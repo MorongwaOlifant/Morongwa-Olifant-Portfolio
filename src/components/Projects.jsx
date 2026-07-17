@@ -14,10 +14,10 @@ const projects = [
   {
     title: "CityFix",
     description:
-      "CityFix is a simple platform that lets citizens report issues like potholes or broken lights and track progress. City officials use it to manage and resolve these reports efficiently.",
+      "A full-stack city reporting platform where residents submit service issues with images and admins manage reports, users, status updates, and fulfilled cases.",
     image: "/projects/cityfix.jpg",
     github: "https://github.com/MorongwaOlifant/cityfix-web",
-    demo: "#",
+    demo: "https://cityfix-nu.vercel.app/",
   },
 ];
 
