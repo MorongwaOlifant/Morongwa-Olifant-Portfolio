@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const projects = [
   {
@@ -38,10 +39,12 @@ export default function Projects() {
             className="group relative aspect-video bg-gray-900 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
           >
             {/* Project Image */}
-            <img
+            <Image
               src={project.image}
               alt={project.title}
-              className="object-cover transition-transform duration-500 group-hover:scale-105 absolute inset-0 w-full h-full"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
 
             {/* Overlay */}
