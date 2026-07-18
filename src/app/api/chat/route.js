@@ -53,6 +53,38 @@ const CV_DATA = {
       "Business Intelligence, User Experience Design"
     ]
   },
+  experience: [
+    {
+      role: "Systems and Data Analytics HRD Intern",
+      company: "Sandvik Mining",
+      type: "Internship",
+      location: "Gauteng",
+      startDate: "2 February 2026",
+      endDate: "Present",
+      responsibilities: [
+        "Developing and maintaining Power Apps and Power Automate solutions for HRD workflows",
+        "Creating and managing SharePoint data structures and dashboards",
+        "Maintaining and troubleshooting systems to support continuity",
+        "Collecting, cleaning, and validating data from HRD systems",
+        "Developing Power BI dashboards",
+        "Supporting BBBEE and Skills Development reporting",
+        "Administering eLearning through the LMS, monitoring learner progress, and generating compliance reports",
+        "Identifying HRD processes for automation and designing Power Automate workflows",
+        "Streamlining eDocs and SharePoint structures",
+        "Analyzing training trends and learner performance and preparing actionable reports and recommendations",
+        "Supporting HRD users and coordinating integration and troubleshooting with IT",
+        "Conducting training on Power Apps and dashboards",
+      ],
+      technologies: [
+        "Microsoft Power Apps",
+        "Microsoft Power Automate",
+        "Microsoft SharePoint",
+        "Power BI",
+        "Learning Management Systems (LMS)",
+        "eLearning systems",
+      ],
+    },
+  ],
   summary: [
     "Detail-oriented Software Developer and IT graduate with a strong foundation in Object-Oriented Programming, Web Development, and Database Systems",
     "Experience building full-stack applications using React.js, Node.js, .NET, and MongoDB",
@@ -170,6 +202,23 @@ function projectAnswer(project, question) {
   return `${project.name} is ${project.description}.${status}${details}\n\n• Live project: ${project.links.demo}\n• GitHub: ${project.links.github}`;
 }
 
+function experienceAnswer(role, question) {
+  if (/(when|start|date)/.test(question)) {
+    return `Morongwa started as ${role.role} at ${role.company} on ${role.startDate} and currently holds the role.`;
+  }
+  if (/(where|company|employer|who.*work for)/.test(question)) {
+    return `Morongwa currently works at ${role.company} in ${role.location} as a ${role.role}.`;
+  }
+  if (/(technolog|system|tool|platform|software|power apps|power automate|sharepoint|power bi|lms)/.test(question)) {
+    return `In his current role, Morongwa works with:\n${bulletList(role.technologies)}`;
+  }
+  if (/(title|role|position)/.test(question)) {
+    return `Morongwa's current position is ${role.role} at ${role.company}, an internship he began on ${role.startDate}.`;
+  }
+
+  return `Morongwa is currently a ${role.role} at ${role.company} in ${role.location}. He started on ${role.startDate}.\n\nHis responsibilities include:\n${bulletList(role.responsibilities)}\n\nTechnologies and systems used:\n${bulletList(role.technologies)}`;
+}
+
 function answerSkillQuestion(question) {
   const skillGroups = Object.values(CV_DATA.skills).flat();
   const aliases = {
@@ -201,6 +250,12 @@ function answerSkillQuestion(question) {
     pbix: "Power BI",
     jupyter: "Jupyter Notebook",
     rstudio: "RStudio",
+    powerapps: "Microsoft Power Apps",
+    "power apps": "Microsoft Power Apps",
+    powerautomate: "Microsoft Power Automate",
+    "power automate": "Microsoft Power Automate",
+    sharepoint: "Microsoft SharePoint",
+    lms: "Learning Management Systems (LMS)",
   };
   const normalizedSkills = skillGroups.map((skill) => ({
     skill,
@@ -245,6 +300,10 @@ function answerSkillQuestion(question) {
   }
 
   if (!skill) return null;
+  const workTechnologies = CV_DATA.experience.flatMap((role) => role.technologies);
+  if (workTechnologies.includes(skill)) {
+    return `Yes. ${skill} is documented as a technology Morongwa uses in his current role at ${CV_DATA.experience[0].company}.`;
+  }
   return `Yes. ${skill} is listed among Morongwa's skills and technologies. His portfolio does not assign proficiency levels, so I can't accurately rate his level beyond that.`;
 }
 
@@ -253,6 +312,7 @@ function answerQuestion(message, history) {
   const context = normalize(`${message} ${recentContext(history)}`);
   const cityFix = CV_DATA.projects.find((project) => project.name === "CityFix");
   const jobsta = CV_DATA.projects.find((project) => project.name === "Jobsta");
+  const currentRole = CV_DATA.experience[0];
 
   if (/^(hi|hello|hey|good morning|good afternoon|good evening)\b/.test(question)) {
     return "Hi! I can answer questions about Morongwa's skills, projects, education, strengths, and technical background.";
@@ -265,6 +325,9 @@ function answerQuestion(message, history) {
   }
   if (/(resume|cv|curriculum vitae)/.test(question)) {
     return "Morongwa's resume is available from the “Download Resume” button in the contact section.";
+  }
+  if (/(sandvik|work experience|employment|employer|current role|job title|where.*work|who.*work for|intern|hrd|what does he do at work|professional experience|professionally|started working|start.*job|system.*at work|tool.*at work|technolog.*at work)/.test(question)) {
+    return experienceAnswer(currentRole, question);
   }
   if (question.includes("cityfix") || (/(it|that|project)/.test(question) && context.includes("cityfix"))) {
     return projectAnswer(cityFix, question);
@@ -317,7 +380,7 @@ function answerQuestion(message, history) {
   if (/(about morongwa|who is|introduce|summary|profile|tell me about)/.test(question)) {
     return `${CV_DATA.identity.name} is a ${CV_DATA.identity.role}.\n${bulletList(CV_DATA.summary)}`;
   }
-  if (/(employ|company|job history|professional experience|professionally|worked|years of experience|available|availability|location|where does he live|salary)/.test(question)) {
+  if (/(years of experience|available|availability|where does he live|salary)/.test(question)) {
     return "That information isn't provided in Morongwa's portfolio. You can use the contact form to ask him directly.";
   }
 
