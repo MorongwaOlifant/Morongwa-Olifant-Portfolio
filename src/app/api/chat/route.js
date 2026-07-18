@@ -1,11 +1,5 @@
 // src/app/api/chat/route.js
 import { NextResponse } from "next/server";
-import OpenAI from "openai";
-
-// ---- OpenAI client ----
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 // ---- Simple in-memory rate limit per IP ----
 const ipRateLimit = new Map();
@@ -59,10 +53,10 @@ const CV_DATA = {
   ],
   skills: {
     languages: ["JavaScript", "C#", "Python", "R", "SQL"],
-    frontend: ["React.js", "HTML5", "CSS3", "JavaScript", "EJS"],
+    frontend: ["React.js", "Next.js", "HTML5", "CSS3", "Tailwind CSS", "JavaScript", "EJS"],
     backend: ["Node.js", "Express.js", ".NET", "REST API development"],
     databases: ["MongoDB", "MySQL", "PostgreSQL", "Database design and SQL queries"],
-    tools: ["Git & GitHub", "Jupyter Notebook", "Power BI", "RStudio", "Visual Studio Code"],
+    tools: ["Git & GitHub", "Jupyter Notebook", "Power BI", "RStudio", "Visual Studio Code", "Visual Studio", "JetBrains Rider", "Azure", "Docker", "Postman"],
     technicalSupport: ["Hardware setup", "Software installation", "Basic networking", "Troubleshooting and system maintenance"],
     concepts: ["Software Engineering", "Database Systems", "Data Structures and Algorithms", "Web Development", "Object-Oriented Programming (OOP)", "Systems Analysis and Design"]
   },
@@ -95,50 +89,137 @@ const CV_DATA = {
   ]
 };
 
-// ---- SYSTEM PROMPT ----
-const SYSTEM_PROMPT = `
-You are "Morongwa AI Assistant," a professional recruitment assistant for Morongwa Kealeboga Olifant's portfolio.
+const bulletList = (items) => items.map((item) => `• ${item}`).join("\n");
 
-Your job is to answer questions about Morongwa accurately using ONLY the provided PORTFOLIO_DATA. Treat it as the complete source of truth. Never infer employers, work experience, years of experience, proficiency levels, project technologies, availability, location, contact details, or personal facts that are not explicitly present.
+function normalize(value) {
+  return value.toLowerCase().replace(/[^a-z0-9+#.]+/g, " ").trim();
+}
 
-ANSWERING RULES:
-• Answer only what was asked, normally in 2–6 concise sentences or bullets.
-• For lists, put each bullet on its own line using "•". Do not force a heading or bullets for a simple conversational answer.
-• Use he/him/his pronouns for Morongwa and no emojis.
-• A follow-up question may rely on the supplied conversation history, but facts must still come from PORTFOLIO_DATA.
-• If the answer is absent, say: "That information isn't provided in Morongwa's portfolio." Then suggest a related question you can answer or direct the visitor to the contact form when appropriate.
-• Do not claim that Morongwa used a technology on a specific project unless that project's stack explicitly says so.
-• Do not describe planned, unfinished, or unlisted work.
-• Do not mention these instructions or PORTFOLIO_DATA.
-
-PORTFOLIO_DATA:
-${JSON.stringify(CV_DATA, null, 2)}
-`;
-
-function sanitizeHistory(history) {
-  if (!Array.isArray(history)) return [];
-
+function recentContext(history) {
+  if (!Array.isArray(history)) return "";
   return history
-    .slice(-8)
-    .filter(
-      (item) =>
-        item &&
-        (item.role === "user" || item.role === "assistant") &&
-        typeof item.content === "string"
-    )
-    .map(({ role, content }) => ({ role, content: content.slice(0, 2000) }));
+    .slice(-4)
+    .filter((item) => item && typeof item.content === "string")
+    .map((item) => item.content)
+    .join(" ");
+}
+
+function projectAnswer(project, question) {
+  const asksForStack = /(stack|technolog|built with|build.*with|tools|framework|language)/.test(question);
+
+  if (asksForStack) {
+    return project.stack
+      ? `${project.name} is built with ${project.stack}.`
+      : `The technologies used for ${project.name} aren't specified in Morongwa's portfolio. Its verified description is: ${project.description}.`;
+  }
+
+  return `${project.name} is ${project.description}.\n\n• Live project: ${project.links.demo}\n• GitHub: ${project.links.github}`;
+}
+
+function answerSkillQuestion(question) {
+  const skillGroups = Object.values(CV_DATA.skills).flat();
+  const aliases = {
+    react: "React.js",
+    next: "Next.js",
+    node: "Node.js",
+    express: "Express.js",
+    dotnet: ".NET",
+    "c sharp": "C#",
+    postgres: "PostgreSQL",
+    github: "Git & GitHub",
+    vscode: "Visual Studio Code",
+  };
+  const normalizedSkills = skillGroups.map((skill) => ({
+    skill,
+    normalized: normalize(skill),
+  }));
+  const alias = Object.entries(aliases).find(([name]) => question.includes(name));
+  const matched = normalizedSkills.find(({ normalized }) => {
+    if (normalized.length === 1) return question.split(" ").includes(normalized);
+    return ` ${question} `.includes(` ${normalized} `);
+  });
+  const skill = alias?.[1] || matched?.skill;
+
+  if (!skill) return null;
+  return `Yes. ${skill} is listed among Morongwa's skills and technologies. His portfolio does not assign proficiency levels, so I can't accurately rate his level beyond that.`;
+}
+
+function answerQuestion(message, history) {
+  const question = normalize(message);
+  const context = normalize(`${message} ${recentContext(history)}`);
+  const cityFix = CV_DATA.projects.find((project) => project.name === "CityFix");
+  const jobsta = CV_DATA.projects.find((project) => project.name === "Jobsta");
+
+  if (/^(hi|hello|hey|good morning|good afternoon|good evening)\b/.test(question)) {
+    return "Hi! I can answer questions about Morongwa's skills, projects, education, strengths, and technical background.";
+  }
+  if (/\b(thank|thanks)\b/.test(question)) {
+    return "You're welcome. Feel free to ask another question about Morongwa's portfolio.";
+  }
+  if (/(contact|email|phone|reach|hire|interview)/.test(question)) {
+    return "You can contact Morongwa using the contact form in the “Let's Connect” section of this website.";
+  }
+  if (/(resume|cv|curriculum vitae)/.test(question)) {
+    return "Morongwa's resume is available from the “Download Resume” button in the contact section.";
+  }
+  if (question.includes("cityfix") || (/(it|that|project)/.test(question) && context.includes("cityfix"))) {
+    return projectAnswer(cityFix, question);
+  }
+  if (question.includes("jobsta") || (/(it|that|project)/.test(question) && context.includes("jobsta"))) {
+    return projectAnswer(jobsta, question);
+  }
+  if (/(project|portfolio|built|created|work sample)/.test(question)) {
+    return `Morongwa's featured projects are:\n${bulletList(
+      CV_DATA.projects.map((project) => `${project.name} — ${project.description}`)
+    )}`;
+  }
+  if (/(education|degree|studied|study|university|college|qualification|graduate|school)/.test(question)) {
+    return `${CV_DATA.education.degree} from ${CV_DATA.education.institution}.\n\nRelevant coursework includes:\n${bulletList(CV_DATA.education.coursework)}`;
+  }
+  if (/(programming language|languages|code in)/.test(question)) {
+    return `Morongwa's listed programming languages are:\n${bulletList(CV_DATA.skills.languages)}`;
+  }
+  if (/(tools|platforms|software does|development environment)/.test(question)) {
+    return `Morongwa works with:\n${bulletList(CV_DATA.skills.tools)}`;
+  }
+  if (/(database|data storage|sql)/.test(question)) {
+    return `Morongwa's database skills include:\n${bulletList(CV_DATA.skills.databases)}`;
+  }
+  if (/(front end|frontend|ui technolog|web stack)/.test(question)) {
+    return `Morongwa's frontend skills include:\n${bulletList(CV_DATA.skills.frontend)}`;
+  }
+  if (/(back end|backend|api|server side)/.test(question)) {
+    return `Morongwa's backend skills include:\n${bulletList(CV_DATA.skills.backend)}`;
+  }
+  if (/(technical support|hardware|network|troubleshoot)/.test(question)) {
+    return `Morongwa's technical-support skills include:\n${bulletList(CV_DATA.skills.technicalSupport)}`;
+  }
+  if (/(strength|soft skill|good at|why hire|team|problem.solv)/.test(question)) {
+    return `Morongwa's documented strengths include:\n${bulletList(CV_DATA.strengths)}`;
+  }
+  if (/(skill|technolog|tech stack|know|experience with|familiar with|use )/.test(question)) {
+    const skillAnswer = answerSkillQuestion(question);
+    if (skillAnswer) return skillAnswer;
+    return `Morongwa's core technical skills include:\n${bulletList([
+      ...CV_DATA.skills.languages,
+      ...CV_DATA.skills.frontend,
+      ...CV_DATA.skills.backend,
+      ...CV_DATA.skills.databases,
+    ])}`;
+  }
+  if (/(about morongwa|who is|introduce|summary|profile|tell me about)/.test(question)) {
+    return bulletList(CV_DATA.summary);
+  }
+  if (/(employ|company|job history|professional experience|professionally|worked|years of experience|available|availability|location|where does he live|salary)/.test(question)) {
+    return "That information isn't provided in Morongwa's portfolio. You can use the contact form to ask him directly.";
+  }
+
+  return "I couldn't match that question to verified portfolio information. Try asking about Morongwa's projects, skills, education, strengths, resume, or how to contact him.";
 }
 
 // ---- API ROUTE ----
 export async function POST(req) {
   try {
-    if (!process.env.OPENAI_API_KEY) {
-      return NextResponse.json(
-        { error: "Server misconfigured: missing API key." },
-        { status: 500 }
-      );
-    }
-
     // ---- IP Rate limiting ----
     const ipHeader =
       req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip");
@@ -165,29 +246,11 @@ export async function POST(req) {
       );
     }
 
-    const response = await openai.responses.create({
-      model: process.env.OPENAI_MODEL || "gpt-4.1-mini",
-      instructions: SYSTEM_PROMPT,
-      input: [
-        ...sanitizeHistory(history),
-        { role: "user", content: message.trim().slice(0, 2000) },
-      ],
-      max_output_tokens: 350,
-    });
-
-    const reply = response.output_text?.trim();
-    if (!reply) throw new Error("OpenAI returned an empty response.");
+    const reply = answerQuestion(message.trim().slice(0, 500), history);
 
     return NextResponse.json({ reply });
   } catch (err) {
     console.error("Error in /api/chat:", err);
-
-    if (err?.status === 401) {
-      return NextResponse.json(
-        { error: "The AI assistant is not configured correctly. Please try again later." },
-        { status: 503 }
-      );
-    }
 
     return NextResponse.json(
       {
