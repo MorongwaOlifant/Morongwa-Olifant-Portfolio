@@ -32,6 +32,14 @@ function isRateLimited(ip) {
 
 // ---- Structured CV Data ----
 const CV_DATA = {
+  identity: {
+    name: "Morongwa Olifant",
+    role: "Software Developer",
+    email: "Olifantmorongwa@gmail.com",
+    phone: "079 305 3609",
+    linkedin: "https://www.linkedin.com/in/morongwa-olifant-0782371a4/",
+    github: "https://github.com/MorongwaOlifant",
+  },
   education: {
     degree: "Bachelor of Information Technology — Specialisation: Software Development",
     institution: "Belgium Campus iTversity (2023–2025)",
@@ -63,7 +71,15 @@ const CV_DATA = {
   projects: [
     {
       name: "Jobsta",
+      status: "in progress",
+      stack: "React.js, Tailwind CSS, Node.js, Firebase",
       description: "A WhatsApp-based job alert platform helping South African youth connect with relevant job opportunities in real time",
+      details: [
+        "Focuses on helping unemployed youth in South Africa",
+        "Uses a React-based interface and backend architecture to manage user data and job matches",
+        "Includes a scalable notification system and database schema designed to improve job-delivery accuracy",
+        "Twilio integration is planned",
+      ],
       links: {
         github: "https://github.com/MorongwaOlifant/jobsta",
         demo: "https://jobsta-8n1hee1g1-morongwa-olifants-projects.vercel.app/"
@@ -77,7 +93,19 @@ const CV_DATA = {
         github: "https://github.com/MorongwaOlifant/cityfix-web",
         demo: "https://cityfix-nu.vercel.app/"
       }
+    },
+    {
+      name: "Personal Portfolio Website",
+      stack: "Next.js, React.js, Tailwind CSS, Vercel",
+      description: "Morongwa's responsive portfolio website showcasing his projects, skills, education, resume, and contact form",
+      links: {
+        github: "https://github.com/MorongwaOlifant/Morongwa-Olifant-Portfolio",
+        demo: "https://www.morongwaolifant.com"
+      }
     }
+  ],
+  certifications: [
+    "Responsive Web Design — freeCodeCamp (2023)"
   ],
   strengths: [
     "Fast learner — Quickly adapts to new technologies and frameworks",
@@ -93,6 +121,30 @@ const bulletList = (items) => items.map((item) => `• ${item}`).join("\n");
 
 function normalize(value) {
   return value.toLowerCase().replace(/[^a-z0-9+#.]+/g, " ").trim();
+}
+
+function compact(value) {
+  return normalize(value).replace(/[^a-z0-9+#]/g, "");
+}
+
+function editDistance(left, right) {
+  const rows = Array.from({ length: left.length + 1 }, () =>
+    Array(right.length + 1).fill(0)
+  );
+  for (let row = 0; row <= left.length; row += 1) rows[row][0] = row;
+  for (let column = 0; column <= right.length; column += 1) rows[0][column] = column;
+
+  for (let row = 1; row <= left.length; row += 1) {
+    for (let column = 1; column <= right.length; column += 1) {
+      const cost = left[row - 1] === right[column - 1] ? 0 : 1;
+      rows[row][column] = Math.min(
+        rows[row - 1][column] + 1,
+        rows[row][column - 1] + 1,
+        rows[row - 1][column - 1] + cost
+      );
+    }
+  }
+  return rows[left.length][right.length];
 }
 
 function recentContext(history) {
@@ -113,32 +165,84 @@ function projectAnswer(project, question) {
       : `The technologies used for ${project.name} aren't specified in Morongwa's portfolio. Its verified description is: ${project.description}.`;
   }
 
-  return `${project.name} is ${project.description}.\n\n• Live project: ${project.links.demo}\n• GitHub: ${project.links.github}`;
+  const status = project.status ? ` Its documented status is ${project.status}.` : "";
+  const details = project.details ? `\n${bulletList(project.details)}` : "";
+  return `${project.name} is ${project.description}.${status}${details}\n\n• Live project: ${project.links.demo}\n• GitHub: ${project.links.github}`;
 }
 
 function answerSkillQuestion(question) {
   const skillGroups = Object.values(CV_DATA.skills).flat();
   const aliases = {
     react: "React.js",
+    reactjs: "React.js",
     next: "Next.js",
+    nextjs: "Next.js",
+    javascript: "JavaScript",
+    js: "JavaScript",
+    html: "HTML5",
+    css: "CSS3",
+    tailwind: "Tailwind CSS",
     node: "Node.js",
+    nodejs: "Node.js",
     express: "Express.js",
+    expressjs: "Express.js",
     dotnet: ".NET",
     "c sharp": "C#",
+    csharp: "C#",
     postgres: "PostgreSQL",
+    postgresql: "PostgreSQL",
+    mysql: "MySQL",
+    mongodb: "MongoDB",
     github: "Git & GitHub",
     vscode: "Visual Studio Code",
+    powerbi: "Power BI",
+    "power bi": "Power BI",
+    "business intelligence": "Power BI",
+    pbix: "Power BI",
+    jupyter: "Jupyter Notebook",
+    rstudio: "RStudio",
   };
   const normalizedSkills = skillGroups.map((skill) => ({
     skill,
     normalized: normalize(skill),
   }));
-  const alias = Object.entries(aliases).find(([name]) => question.includes(name));
+  const compactQuestion = compact(question);
+  const alias = Object.entries(aliases).find(([name]) =>
+    compactQuestion.includes(compact(name))
+  );
   const matched = normalizedSkills.find(({ normalized }) => {
     if (normalized.length === 1) return question.split(" ").includes(normalized);
     return ` ${question} `.includes(` ${normalized} `);
   });
-  const skill = alias?.[1] || matched?.skill;
+  let skill = alias?.[1] || matched?.skill;
+
+  if (!skill) {
+    const words = question.split(" ").filter((word) => word.length >= 2);
+    const phrases = words.flatMap((_, index) => [
+      words[index],
+      words.slice(index, index + 2).join(""),
+      words.slice(index, index + 3).join(""),
+    ]);
+    const fuzzyAlias = Object.entries(aliases).find(([name]) => {
+      const candidateValue = compact(name);
+      if (candidateValue.length < 4) return false;
+      const tolerance = candidateValue.length >= 6 ? 2 : 1;
+      return phrases.some(
+        (phrase) => editDistance(compact(phrase), candidateValue) <= tolerance
+      );
+    });
+    skill = fuzzyAlias?.[1];
+
+    const fuzzyMatch = normalizedSkills.find(({ skill: candidate }) => {
+      const candidateValue = compact(candidate);
+      return phrases.some((phrase) => {
+        const wordValue = compact(phrase);
+        const tolerance = candidateValue.length >= 6 ? 2 : 1;
+        return editDistance(wordValue, candidateValue) <= tolerance;
+      });
+    });
+    skill ||= fuzzyMatch?.skill;
+  }
 
   if (!skill) return null;
   return `Yes. ${skill} is listed among Morongwa's skills and technologies. His portfolio does not assign proficiency levels, so I can't accurately rate his level beyond that.`;
@@ -157,7 +261,7 @@ function answerQuestion(message, history) {
     return "You're welcome. Feel free to ask another question about Morongwa's portfolio.";
   }
   if (/(contact|email|phone|reach|hire|interview)/.test(question)) {
-    return "You can contact Morongwa using the contact form in the “Let's Connect” section of this website.";
+    return `You can contact Morongwa using the website's “Let's Connect” form.\n\n• Email: ${CV_DATA.identity.email}\n• Phone: ${CV_DATA.identity.phone}\n• LinkedIn: ${CV_DATA.identity.linkedin}`;
   }
   if (/(resume|cv|curriculum vitae)/.test(question)) {
     return "Morongwa's resume is available from the “Download Resume” button in the contact section.";
@@ -167,6 +271,9 @@ function answerQuestion(message, history) {
   }
   if (question.includes("jobsta") || (/(it|that|project)/.test(question) && context.includes("jobsta"))) {
     return projectAnswer(jobsta, question);
+  }
+  if (/(certif|credential|freecodecamp|responsive web design)/.test(question)) {
+    return `Morongwa's listed certification is:\n${bulletList(CV_DATA.certifications)}`;
   }
   if (/(project|portfolio|built|created|work sample)/.test(question)) {
     return `Morongwa's featured projects are:\n${bulletList(
@@ -208,7 +315,7 @@ function answerQuestion(message, history) {
     ])}`;
   }
   if (/(about morongwa|who is|introduce|summary|profile|tell me about)/.test(question)) {
-    return bulletList(CV_DATA.summary);
+    return `${CV_DATA.identity.name} is a ${CV_DATA.identity.role}.\n${bulletList(CV_DATA.summary)}`;
   }
   if (/(employ|company|job history|professional experience|professionally|worked|years of experience|available|availability|location|where does he live|salary)/.test(question)) {
     return "That information isn't provided in Morongwa's portfolio. You can use the contact form to ask him directly.";
