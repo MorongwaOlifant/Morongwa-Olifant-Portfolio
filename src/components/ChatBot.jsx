@@ -28,7 +28,7 @@ export default function ChatBot() {
     {
       role: "assistant",
       content:
-        "Hi, I’m Morongwa’s AI assistant. Ask me anything about his skills, projects, or experience.",
+        "Hi, I’m Morongwa’s AI assistant. Ask me anything about his skills, projects, education, or technical background.",
     },
   ]);
 
