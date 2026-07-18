@@ -58,22 +58,13 @@ const CV_DATA = {
       role: "Systems and Data Analytics HRD Intern",
       company: "Sandvik Mining",
       type: "Internship",
-      location: "Gauteng",
       startDate: "2 February 2026",
       endDate: "Present",
       responsibilities: [
-        "Developing and maintaining Power Apps and Power Automate solutions for HRD workflows",
-        "Creating and managing SharePoint data structures and dashboards",
-        "Maintaining and troubleshooting systems to support continuity",
-        "Collecting, cleaning, and validating data from HRD systems",
-        "Developing Power BI dashboards",
-        "Supporting BBBEE and Skills Development reporting",
-        "Administering eLearning through the LMS, monitoring learner progress, and generating compliance reports",
-        "Identifying HRD processes for automation and designing Power Automate workflows",
-        "Streamlining eDocs and SharePoint structures",
-        "Analyzing training trends and learner performance and preparing actionable reports and recommendations",
-        "Supporting HRD users and coordinating integration and troubleshooting with IT",
-        "Conducting training on Power Apps and dashboards",
+        "Building Power Apps and Power Automate workflows for HRD processes",
+        "Managing SharePoint structures, eLearning data, and compliance reporting",
+        "Cleaning and analyzing HRD data and developing Power BI dashboards",
+        "Supporting HRD users, reporting, automation, and systems troubleshooting",
       ],
       technologies: [
         "Microsoft Power Apps",
@@ -207,7 +198,7 @@ function experienceAnswer(role, question) {
     return `Morongwa started as ${role.role} at ${role.company} on ${role.startDate} and currently holds the role.`;
   }
   if (/(where|company|employer|who.*work for)/.test(question)) {
-    return `Morongwa currently works at ${role.company} in ${role.location} as a ${role.role}.`;
+    return `Morongwa currently works at ${role.company} as a ${role.role}.`;
   }
   if (/(technolog|system|tool|platform|software|power apps|power automate|sharepoint|power bi|lms)/.test(question)) {
     return `In his current role, Morongwa works with:\n${bulletList(role.technologies)}`;
@@ -216,7 +207,7 @@ function experienceAnswer(role, question) {
     return `Morongwa's current position is ${role.role} at ${role.company}, an internship he began on ${role.startDate}.`;
   }
 
-  return `Morongwa is currently a ${role.role} at ${role.company} in ${role.location}. He started on ${role.startDate}.\n\nHis responsibilities include:\n${bulletList(role.responsibilities)}\n\nTechnologies and systems used:\n${bulletList(role.technologies)}`;
+  return `Morongwa is currently a ${role.role} at ${role.company}. He started on ${role.startDate}.\n\nHis responsibilities include:\n${bulletList(role.responsibilities)}\n\nTechnologies and systems used:\n${bulletList(role.technologies)}`;
 }
 
 function answerSkillQuestion(question) {

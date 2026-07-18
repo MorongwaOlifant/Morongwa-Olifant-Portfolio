@@ -1,22 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BriefcaseIcon, MapPinIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 const experience = {
   role: "Systems and Data Analytics HRD Intern",
   company: "Sandvik Mining",
-  location: "Gauteng",
   period: "2 February 2026 – Present",
   responsibilities: [
-    "Develop and maintain Power Apps and Power Automate solutions for HRD workflows.",
-    "Create and manage SharePoint data structures and dashboards.",
-    "Collect, clean, and validate HRD data, then develop Power BI dashboards and actionable reports.",
-    "Support BBBEE and Skills Development reporting requirements.",
-    "Administer eLearning through the LMS, monitor learner progress, and generate compliance reports.",
-    "Identify HRD processes for automation and streamline eDocs and SharePoint structures.",
-    "Analyze training trends and learner performance to prepare reports and recommendations.",
-    "Support HRD users, coordinate technical troubleshooting with IT, and conduct training on Power Apps and dashboards.",
+    "Build Power Apps and Power Automate workflows for HRD processes.",
+    "Manage SharePoint structures, eLearning data, and compliance reporting.",
+    "Clean and analyze HRD data and develop Power BI dashboards.",
+    "Support HRD users, reporting, automation, and systems troubleshooting.",
   ],
 };
 
@@ -36,8 +31,14 @@ export default function Experience() {
       >
         <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex items-start gap-4">
-            <div className="rounded-2xl bg-gray-100 p-3">
-              <BriefcaseIcon className="h-8 w-8 text-gray-900" />
+            <div className="flex h-16 w-36 flex-none items-center justify-center rounded-2xl bg-gray-50 p-3">
+              <Image
+                src="/logos/organizations/sandvik.svg"
+                alt="Sandvik"
+                width={132}
+                height={24}
+                className="h-auto w-full"
+              />
             </div>
             <div>
               <h3 className="text-xl font-bold text-gray-900 sm:text-2xl">
@@ -45,10 +46,6 @@ export default function Experience() {
               </h3>
               <p className="mt-1 text-lg font-medium text-gray-700">
                 {experience.company}
-              </p>
-              <p className="mt-2 flex items-center gap-1.5 text-sm text-gray-500">
-                <MapPinIcon className="h-4 w-4" />
-                {experience.location}
               </p>
             </div>
           </div>
