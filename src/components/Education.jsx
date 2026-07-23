@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AcademicCapIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 export default function Education() {
   return (
@@ -14,16 +14,22 @@ export default function Education() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="max-w-3xl mx-auto bg-white rounded-3xl shadow-lg p-8 flex items-start gap-6"
+        className="max-w-5xl mx-auto bg-white rounded-3xl shadow-lg p-8 flex flex-col sm:flex-row items-center gap-8"
       >
-        {/* Icon */}
-        <div className="flex-shrink-0">
-          <AcademicCapIcon className="h-12 w-12 text-black" />
+        {/* Institution logo */}
+        <div className="flex h-20 w-44 flex-shrink-0 items-center justify-center p-3">
+          <Image
+            src="/logos/organizations/belgium-campus.svg"
+            alt="Belgium Campus iTversity"
+            width={160}
+            height={50}
+            className="h-auto w-full grayscale"
+          />
         </div>
 
         {/* Content */}
-        <div>
-          <h3 className="text-xl font-semibold text-gray-800">
+        <div className="min-w-0 flex-1">
+          <h3 className="text-xl font-semibold text-gray-800 lg:whitespace-nowrap">
             Bachelor of Information Technology (Software Development)
           </h3>
           <p className="text-gray-600 mt-1">

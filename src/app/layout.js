@@ -4,11 +4,11 @@ import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   metadataBase: new URL("https://morongwa.dev"), // change after domain is live
-  title: "Morongwa Olifant – Software Developer",
+  title: "Morongwa Olifant – Data Analyst | Software Developer",
   description:
     "Portfolio of Morongwa Olifant: Next.js/React developer. Projects: Jobsta, PayTrckr, Zazi. Contact for internships and junior roles.",
   openGraph: {
-    title: "Morongwa Olifant – Software Developer",
+    title: "Morongwa Olifant – Data Analyst | Software Developer",
     description:
       "Portfolio of Morongwa Olifant: Next.js/React developer. Projects: Jobsta, PayTrckr, Zazi.",
     url: "https://morongwa.dev",
@@ -26,7 +26,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Morongwa Olifant – Software Developer",
+    title: "Morongwa Olifant – Data Analyst | Software Developer",
     description:
       "Portfolio of Morongwa Olifant: Next.js/React developer. Projects: Jobsta, PayTrckr, Zazi.",
     images: ["/og.jpg"],

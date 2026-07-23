@@ -13,7 +13,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      const sections = ["hero", "education", "projects", "skills", "contact"];
+      const sections = ["hero", "education", "experience", "projects", "skills", "contact"];
       let current = "hero";
 
       sections.forEach((id) => {
@@ -33,7 +33,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = ["Home", "Education", "Projects", "Skills", "Contact"];
+  const navItems = ["Home", "Education", "Experience", "Projects", "Skills", "Contact"];
 
   return (
     <header

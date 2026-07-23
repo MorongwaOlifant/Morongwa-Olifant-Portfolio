@@ -29,7 +29,7 @@ export default function Hero() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="mt-4 text-lg sm:text-xl text-gray-600"
       >
-        Software Developer
+        Data Analyst | Software Developer
       </motion.p>
 
       {/* Call to action buttons */}
