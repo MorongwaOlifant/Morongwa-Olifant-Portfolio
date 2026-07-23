@@ -53,6 +53,12 @@ const CV_DATA = {
       "Business Intelligence, User Experience Design"
     ]
   },
+  experience: {
+    role: "Systems and Data Analyst",
+    company: "Sandvik",
+    type: "Internship",
+    period: "February 2026 – Present",
+  },
   summary: [
     "Detail-oriented Data Analyst, Software Developer, and IT graduate with a strong foundation in data analytics, Object-Oriented Programming, Web Development, and Database Systems",
     "Experience building full-stack applications using React.js, Node.js, .NET, and MongoDB",
@@ -265,6 +271,10 @@ function answerQuestion(message, history) {
   }
   if (/(resume|cv|curriculum vitae)/.test(question)) {
     return "Morongwa's resume is available from the “Download Resume” button in the contact section.";
+  }
+  if (/(sandvik|work experience|employment|employer|current role|job title|where.*work|who.*work for|intern|professional experience)/.test(question)) {
+    const role = CV_DATA.experience;
+    return `Morongwa works at ${role.company} as a ${role.role} (${role.type}), from ${role.period}.`;
   }
   if (question.includes("cityfix") || (/(it|that|project)/.test(question) && context.includes("cityfix"))) {
     return projectAnswer(cityFix, question);
