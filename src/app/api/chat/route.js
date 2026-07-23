@@ -34,7 +34,7 @@ function isRateLimited(ip) {
 const CV_DATA = {
   identity: {
     name: "Morongwa Olifant",
-    role: "Software Developer",
+    role: "Data Analyst | Software Developer",
     email: "Olifantmorongwa@gmail.com",
     phone: "079 305 3609",
     linkedin: "https://www.linkedin.com/in/morongwa-olifant-0782371a4/",
@@ -54,7 +54,7 @@ const CV_DATA = {
     ]
   },
   summary: [
-    "Detail-oriented Software Developer and IT graduate with a strong foundation in Object-Oriented Programming, Web Development, and Database Systems",
+    "Detail-oriented Data Analyst, Software Developer, and IT graduate with a strong foundation in data analytics, Object-Oriented Programming, Web Development, and Database Systems",
     "Experience building full-stack applications using React.js, Node.js, .NET, and MongoDB",
     "Comfortable with hardware setup, networking basics, and IT troubleshooting",
     "Known for clean, maintainable code, adaptability, teamwork, and continuous learning in fast-paced environments"
